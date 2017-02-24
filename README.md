@@ -91,14 +91,9 @@ kmbio.getTreeUPGMASet(seqSet)
 ```
 <object data="https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.pdf">
-        This browser may not support PDFs. If so, please download the PDF to view sample Tree: <a href="https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.pdf">Download PDF</a>.</p>
+        Rendering PDFs is difficult. Please download the PDF to view sample Tree: <a href="https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.pdf">Download PDF</a>.</p>
     </embed>
 </object>
-BioLibrary/examples/kmer7_Corr_UPGMA_Tree.pdf
-[[Tree|https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.pdf]]
-![tree](BioLibrary/examples/kmer7_Corr_UPGMA_Tree.pdf)
-![tree](https://github.com/CrakeNotSnowman/BioLibrary/examples/kmer7_Corr_UPGMA_Tree.pdf)
-![tree](https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.pdf)
 
 ```python
 #   Plot Prep
