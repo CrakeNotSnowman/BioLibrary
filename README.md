@@ -5,8 +5,9 @@ Author(s): Keith Murray
 
 Contact: kmurrayis@gmail.com
 
-Certain Functions/snipits from:	 Ufuk Nalbantoglu,
-				 Sam Way
+Certain Functions/snipits from:
+* Ufuk Nalbantoglu
+* Sam Way
 
 
 
@@ -51,11 +52,19 @@ not compatible with with python 3.x
 * scikit-learn
 
 ## Basic Usage
+To explore the usage of the library, we'll focus on sequences outlined in 
+*Towards defining the chloroviruses: a genomic journey through a genus of large DNA viruses* <cite>[1]</cite>
+with the exception of the Ostreococcus virus set. 
+
+Here is ML tree "based on a concatenated alignment of 32 core protein families" for reference:
+![bio_trees](https://static-content.springer.com/image/art%3A10.1186%2F1471-2164-14-158/MediaObjects/12864_2012_Article_4824_Fig1_HTML.jpg)
 
 ```python
 # Import Libraries
 import kmbio
 from sklearn.decomposition import PCA
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Sample Set Prep (Specific to this set)
 # Get labels
@@ -83,7 +92,7 @@ seqSet.getDBP1()
 seqSet.getDict()
 
 
-# Get Representations 
+# Get Representations and Visualizations
 seqSet.distMat("kmer", "c")
 
 #   Build a tree
@@ -94,6 +103,16 @@ kmbio.getTreeUPGMASet(seqSet)
         Rendering PDFs is difficult. Please download the PDF to view sample Tree: <a href="https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.pdf">Download PDF</a>.</p>
     </embed>
 </object>
+Here is the pdf rendered as a .png:
+![kmer7_Tree](https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_UPGMA_Tree.png)
+
+
+
+For the plots, we will adhere to the following representations, 
+
+* Green:  SAG
+* Blue:   Pbi
+* Yellow: NC64A
 
 ```python
 #   Plot Prep
@@ -103,6 +122,39 @@ blue = display == 1
 yellow = display == 3
 green = display == 2
 
+# Get Distance Matrix
+seqSet.distMat("kmer", "c")
+pca = PCA()
+kmer_pca = pca.fit_transform(seqSet.dm)
 
-
+# Lets get plotting! 
+plt.plot(kmer_pca[blue, 0],kmer_pca[blue, 1], 'bo')
+plt.plot(kmer_pca[yellow, 0],kmer_pca[yellow, 1], 'yo')
+plt.plot(kmer_pca[green, 0],kmer_pca[green, 1], 'go')
+plt.title("PCA on Distance Matrix of 7mer Profiles")
+plt.show()
 ```
+![kmer7_plot](https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/kmer7_Corr_Scatter_Plot.png)
+
+Let's add labels to double check accuracy
+```python
+plt.plot(kmer_pca[blue, 0],kmer_pca[blue, 1], 'bo')
+plt.plot(kmer_pca[yellow, 0],kmer_pca[yellow, 1], 'yo')
+plt.plot(kmer_pca[green, 0],kmer_pca[green, 1], 'go')
+plt.title("PCA on Distance Matrix of 7mer Profiles")
+for i in range(len(short_labels)):
+    plt.annotate(short_labels[i], (P[i,0], P[i,1]))
+plt.show()
+```
+![kmer7Label_plot](https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/labeled_kmer7_Corr_Scatter_Plot.png)
+
+and lets get all of the other plots shown here as well
+
+![all_plots](https://github.com/CrakeNotSnowman/BioLibrary/blob/master/examples/Full_Scatter_Plots.png)
+
+
+
+
+[1]: Jeanniard, A., Dunigan, D. D., Gurnon, J. R., Agarkova, I. V., Kang, M., Vitek, J., ... & Van Etten, J. L. (2013). Towards defining the chloroviruses: a genomic journey through a genus of large DNA viruses. BMC genomics, 14(1), 158.
+
+
